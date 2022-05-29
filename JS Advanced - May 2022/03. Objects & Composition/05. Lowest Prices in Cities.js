@@ -9,11 +9,14 @@ function solve(array) {
     }
     if (price < lowestPricedProducts[product].price) {
       lowestPricedProducts[product].price = price;
+      lowestPricedProducts[product].town = town;
     }
   }
   //{productName} -> {productLowestPrice} ({townName})
   for (const product in lowestPricedProducts) {
-    console.log(`${product} -> ${lowestPricedProducts[product].price} (${lowestPricedProducts[product].town})`);
+    console.log(
+      `${product} -> ${lowestPricedProducts[product].price} (${lowestPricedProducts[product].town})`
+    );
   }
 }
 solve([
