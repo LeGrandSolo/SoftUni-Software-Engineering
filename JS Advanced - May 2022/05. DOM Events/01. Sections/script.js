@@ -4,6 +4,7 @@ function create(words) {
       let newDiv = document.createElement('div');
       let p = document.createElement('p');
       p.textContent = word;
+      p.style.display = 'none';
       newDiv.appendChild(p);
       newDiv.addEventListener('click', () => p.style.display = 'block');
       content.appendChild(newDiv);
