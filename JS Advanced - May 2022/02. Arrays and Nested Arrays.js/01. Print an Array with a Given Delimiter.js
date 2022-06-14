@@ -5,4 +5,4 @@ console.log(solve(['One',
 'Four', 
 'Five'], 
 '-'
-))
+));

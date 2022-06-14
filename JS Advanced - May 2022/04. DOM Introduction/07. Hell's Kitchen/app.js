@@ -53,7 +53,7 @@ function solve() {
       sorted.forEach(x => {
          strWorkersOutput += `Name: ${x[0]} With Salary: ${x[1]} `;
          return strWorkersOutput;
-      })
+      });
       strWorkersOutput = strWorkersOutput.substring(0, strWorkersOutput.length - 1);
       let bestRestWorkerOutput = document.querySelector('#workers p');
       bestRestWorkerOutput.textContent = strWorkersOutput;

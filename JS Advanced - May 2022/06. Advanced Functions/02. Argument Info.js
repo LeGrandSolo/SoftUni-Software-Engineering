@@ -1,6 +1,6 @@
-function solve(...arguments) {
+function solve(...args) {
     let types = {};
-    for (const argument of arguments) {
+    for (const argument of args) {
         let type = typeof argument;
         if (!types[type]) {
             types[type] = 0;

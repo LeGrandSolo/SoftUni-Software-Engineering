@@ -5,7 +5,7 @@ function search() {
    elements.forEach(x => {
       x.style.textDecoration = '';
       x.style.fontWeight = '';
-   })
+   });
    let numOfMatches = 0;
    for (const element of elements) {
       let match = pattern.exec(element.textContent);
@@ -16,5 +16,5 @@ function search() {
          element.style.fontWeight = 'bold';
       }
    }
-   document.getElementById('result').textContent = `${numOfMatches} matches found`
+   document.getElementById('result').textContent = `${numOfMatches} matches found`;
 }

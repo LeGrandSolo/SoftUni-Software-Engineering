@@ -1,5 +1,5 @@
 function solve() {
-  document.querySelector('button').addEventListener('click', addItems)
+  document.querySelector('button').addEventListener('click', addItems);
   function addItems(e) {
     let input = document.querySelector('#exercise textarea');
     let arrOfObjItems = JSON.parse(input.value);
@@ -51,6 +51,7 @@ function solve() {
       }
     }
     let avrDecFactor = totalDecFactor / furnitureAmount;
+    // eslint-disable-next-line curly
     if(Number.isNaN(avrDecFactor)) avrDecFactor= 0;
     let textArea = document.querySelectorAll('textarea')[1];
     textArea.textContent = `Bought furniture: ${furnitureBought.join(', ')}\r\nTotal price: ${totalPrice.toFixed(2)}\r\nAverage decoration factor: ${avrDecFactor}`;

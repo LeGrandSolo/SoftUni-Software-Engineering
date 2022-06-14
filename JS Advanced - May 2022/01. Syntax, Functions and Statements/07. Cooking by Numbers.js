@@ -1,5 +1,5 @@
 function solve(num, ...operations) {
-    num = +num
+    num = +num;
     /* for (const operation of operations) {
         switch (operation) {
             case 'chop':
@@ -32,4 +32,4 @@ function solve(num, ...operations) {
         console.log(num);
     }
 }
-solve('9', 'dice', 'spice', 'chop', 'bake', 'fillet')
+solve('9', 'dice', 'spice', 'chop', 'bake', 'fillet');

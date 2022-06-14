@@ -18,7 +18,7 @@ function magicMatrices(matrix) {
             }
             lastSum = sum;
         }
-        return [true, sum]
+        return [true, sum];
     }
     function checkIfColmsAreSame(matrix, sum) {
         let lastSum = 0;
@@ -47,4 +47,4 @@ console.log(magicMatrices([
     [4, 5, 6],
     [5, 5, 5],
     [5, 5, 5]]
-))
+));

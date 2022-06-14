@@ -20,4 +20,4 @@ solve(['add',
     'remove',
     'add',
     'add']
-)
+);

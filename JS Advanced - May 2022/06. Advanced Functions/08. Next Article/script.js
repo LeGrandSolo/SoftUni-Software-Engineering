@@ -5,5 +5,5 @@ function getArticleGenerator(articles) {
             article.textContent = articles.shift();
             document.querySelector('#content').appendChild(article);
         }
-    }
+    };
 }

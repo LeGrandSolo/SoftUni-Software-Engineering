@@ -6,9 +6,9 @@ function solve() {
         prevFibNum = currFibNum;
         currFibNum = next;
         return prevFibNum;
-    }
+    };
 }
-let result = solve()
+let result = solve();
 console.log(result());
 console.log(result());
 console.log(result());

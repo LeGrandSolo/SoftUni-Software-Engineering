@@ -6,4 +6,4 @@ function listOfNames(arr) {
         console.log(numOfName + '.' + element);
     });
 }
-listOfNames(["John", "Bob", "Christina", "Ema"])
+listOfNames(['John', 'Bob', 'Christina', 'Ema']);

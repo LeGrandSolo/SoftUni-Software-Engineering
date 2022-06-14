@@ -6,7 +6,7 @@ function solve(string) {
         word = word.toLocaleUpperCase();
         finalStr += word + ', ';
     }
-    finalStr = finalStr.slice(0, -2)
+    finalStr = finalStr.slice(0, -2);
     console.log(finalStr);
 }
-solve('Hi, how are you?')
+solve('Hi, how are you?');

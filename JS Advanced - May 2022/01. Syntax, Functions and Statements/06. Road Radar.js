@@ -32,4 +32,4 @@ function solve(speed, area) {
         console.log(`The speed is ${speedLimitSpeedDiff} km/h faster than the allowed speed of ${speedLimit} - ${status}`);
     }
 }
-solve(21, 'residential')
+solve(21, 'residential');

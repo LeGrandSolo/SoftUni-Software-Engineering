@@ -2,8 +2,8 @@ function encodeAndDecodeMessages() {
     let message = document.querySelectorAll('div')[1];
     let recieverMessage = document.querySelectorAll('div')[2];
     console.log(document.querySelectorAll('div'));
-    message.querySelector('button').addEventListener('click', encrypt)
-    recieverMessage.querySelector('button').addEventListener('click', decrypt)
+    message.querySelector('button').addEventListener('click', encrypt);
+    recieverMessage.querySelector('button').addEventListener('click', decrypt);
     function encrypt(e) {
         let txt = e.target.parentElement.querySelector('textarea').value;
         txt = txt.split('');

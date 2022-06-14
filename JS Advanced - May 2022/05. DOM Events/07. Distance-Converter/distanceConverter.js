@@ -52,7 +52,7 @@ function attachEventsListeners() {
                 return u * 0.0254;
             }
         }
-    }
+    };
     let button = document.getElementById('convert');
     button.addEventListener('click', convert);
     function convert(e) {
@@ -61,10 +61,10 @@ function attachEventsListeners() {
         let outputValue = document.getElementById('outputUnits').value;
         //in is reserved word, in = inc
         if (inputValue == 'in') {
-            inputValue = 'inc'
+            inputValue = 'inc';
         }
         if (outputValue == 'in') {
-            outputValue = 'inc'
+            outputValue = 'inc';
         }
         let meters = ratiosInM[inputValue](distance, false);
         let inUnit = ratiosInM[outputValue](meters, true);

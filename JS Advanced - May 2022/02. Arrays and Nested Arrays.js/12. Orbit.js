@@ -43,12 +43,12 @@ function orbit(input) {
         }
     }
     for (let i = 0; i < dimentionY; i++) {
-        let colmn = []
+        let colmn = [];
         for (let j = 0; j < dimentionX; j++) {
-            colmn.push(newMatrix[j][i])
+            colmn.push(newMatrix[j][i]);
         }
-        colmn = []
+        colmn = [];
     }
     console.log(newMatrix.join('\n').split(',').join(' '));
 }
-orbit([5, 5, 2, 2])
+orbit([5, 5, 2, 2]);

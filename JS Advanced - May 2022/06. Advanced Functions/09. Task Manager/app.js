@@ -43,7 +43,7 @@ function solve() {
             dueDate.value = '';
         }
         function modifyTask(e) {
-            let article = e.target.parentElement.parentElement
+            let article = e.target.parentElement.parentElement;
             if (article.parentElement === sectionOpen) {
                 if (e.target.textContent === 'Delete') {
                     article.remove();

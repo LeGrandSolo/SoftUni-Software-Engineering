@@ -32,7 +32,7 @@ function solve() {
                 13: 'D',
                 14: 'E',
                 15: 'F'
-            }
+            };
             while (decimalNum / 16 >= 1) {
                 if (decimalNum % 16 > 9) {
                     hecaNum += correspLett[decimalNum % 16];

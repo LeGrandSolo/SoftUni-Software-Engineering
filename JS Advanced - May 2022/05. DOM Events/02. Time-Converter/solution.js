@@ -1,6 +1,6 @@
 function attachEventsListeners() {
     let allElements = document.getElementsByTagName('main')[0];
-    allElements.addEventListener('click', convert)
+    allElements.addEventListener('click', convert);
     function convert(e) {
         if (e.target.type == 'button') {
             let unit = e
@@ -13,7 +13,7 @@ function attachEventsListeners() {
             let hours = document.getElementById('hours').value;
             let minutes = document.getElementById('minutes').value;
             let seconds = document.getElementById('seconds').value;
-            [days, hours, minutes, seconds] = [+days, +hours, +minutes, +seconds]
+            [days, hours, minutes, seconds] = [+days, +hours, +minutes, +seconds];
             switch (unit) {
                 case 'Days':
                     hours = days * 24;
@@ -31,7 +31,7 @@ function attachEventsListeners() {
                     seconds = minutes * 60;
                     break;
                 case 'Seconds':
-                    minutes = seconds / 60
+                    minutes = seconds / 60;
                     hours = minutes / 60;
                     days = hours / 24;
                     break;
