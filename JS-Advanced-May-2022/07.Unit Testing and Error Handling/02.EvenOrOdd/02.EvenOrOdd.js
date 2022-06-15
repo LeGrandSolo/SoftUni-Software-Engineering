@@ -1,4 +1,3 @@
-isOddOrEven.js
 function isOddOrEven(string) {
     if (typeof(string) !== 'string') {
         return undefined;
@@ -9,4 +8,4 @@ function isOddOrEven(string) {
 
     return "odd";
 }
-module.exports = {isOddOrEven}
+module.exports = {isOddOrEven};

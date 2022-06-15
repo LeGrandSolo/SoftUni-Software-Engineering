@@ -16,5 +16,5 @@ describe('lookupChar',() =>{
     it('returns char at the specified index if index is valid', ()=>{
         expect(lookupChar('string', 1)).to.equal("t");
         expect(lookupChar('string', 0)).to.equal("s");
-    })
+    });
 });
