@@ -22,7 +22,7 @@ class Company {
     }
     this.departments[department].push({ name, salary, position });
     this.departments[department]["allSalariesCombined"] += salary;
-    return `New employee is hired. Name: ${name}. Position: ${position}`
+    return `New employee is hired. Name: ${name}. Position: ${position}`;
   }
   bestDepartment() {
     let bestAvrgSal = 0;
