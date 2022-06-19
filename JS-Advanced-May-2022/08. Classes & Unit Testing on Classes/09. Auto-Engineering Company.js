@@ -30,4 +30,4 @@ solve(['Audi | Q7 | 1000',
 'Lada | Jigula | 1000000',
 'Citroen | C4 | 22',
 'Citroen | C5 | 10']
-)
+);
