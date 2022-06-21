@@ -59,3 +59,4 @@ function orbit(input) {
   }
 }
 orbit([7, 7, 0, 0]);
+orbit([5, 5, 2, 2]);
