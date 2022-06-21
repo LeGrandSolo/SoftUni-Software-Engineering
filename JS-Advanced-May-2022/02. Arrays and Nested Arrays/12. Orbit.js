@@ -1,54 +1,61 @@
 function orbit(input) {
-    const [dimentionX, dimentionY, starX, starY] = input;
-    let newMatrix = new Array(dimentionY).fill(1).map(_ => new Array(dimentionX).fill(1));
-    let orbitPower = 1;
-    let orbitX = 1;
-    let orbitY = 1;
-    while (orbitPower < dimentionX - starX) {
-        orbitPower++;
-        if (newMatrix[starY + orbitY][starX]) {
-            newMatrix[starY + orbitY][starX] = orbitPower;
-        }
-        if (newMatrix[starY - orbitY][starX]) {
-            newMatrix[starY - orbitY][starX] = orbitPower;
-        }
-        if (newMatrix[starY][starX + orbitX]) {
-            newMatrix[starY][starX + orbitX] = orbitPower;
-        }
-        if (newMatrix[starY][starX - orbitX]) {
-            newMatrix[starY][starX - orbitX] = orbitPower;
-        }
-        if (newMatrix[starY + orbitY][starX + orbitX]) {
-            newMatrix[starY + orbitY][starX + orbitX] = orbitPower;
-        }
-        if (newMatrix[starY + orbitY][starX - orbitX]) {
-            newMatrix[starY + orbitY][starX - orbitX] = orbitPower;
-        }
-        if (newMatrix[starY - orbitY][starX + orbitX]) {
-            newMatrix[starY - orbitY][starX + orbitX] = orbitPower;
-        }
-        if (newMatrix[starY - orbitY][starX - orbitX]) {
-            newMatrix[starY - orbitY][starX - orbitX] = orbitPower;
-        }
-        orbitX++;
-        orbitY++;
-    }
+  const [dimentionX, dimentionY, starY, starX] = input;
+  const matrix = new Array(dimentionY)
+    .fill("Empty")
+    .map((_) => new Array(dimentionX).fill("Empty"));
+  matrix[starY][starX] = 1;
+  let power = 1;
+  while (power < dimentionY) {
     for (let i = 0; i < dimentionY; i++) {
-        const col = newMatrix[i];
-        let lastIndex = dimentionX - 1;
-        for (let j = 0; j < dimentionX - 1; j++) {
-            if (!(col[j] == col[lastIndex])) {
-                col[j + 1] = col[j];
+      for (let j = 0; j < dimentionX; j++) {
+        if (matrix[i][j] === "Empty") {
+          if (matrix[i - 1]) {
+            if (matrix[i - 1][j] === power) {
+              matrix[i][j] = power + 1;
             }
+            if (matrix[i - 1][j - 1]) {
+              if (matrix[i - 1][j - 1] === power) {
+                matrix[i][j] = power + 1;
+              }
+            }
+            if (matrix[i - 1][j + 1]) {
+              if (matrix[i - 1][j + 1] === power) {
+                matrix[i][j] = power + 1;
+              }
+            }
+          }
+          if (matrix[i + 1]) {
+            if (matrix[i + 1][j] === power) {
+              matrix[i][j] = power + 1;
+            }
+            if (matrix[i + 1][j - 1]) {
+              if (matrix[i + 1][j - 1] === power) {
+                matrix[i][j] = power + 1;
+              }
+            }
+            if (matrix[i + 1][j + 1]) {
+              if (matrix[i + 1][j + 1] === power) {
+                matrix[i][j] = power + 1;
+              }
+            }
+          }
+          if (matrix[i][j + 1]) {
+            if (matrix[i][j + 1] === power) {
+              matrix[i][j] = power + 1;
+            }
+          }
+          if (matrix[i][j - 1]) {
+            if (matrix[i][j - 1] === power) {
+              matrix[i][j] = power + 1;
+            }
+          }
         }
+      }
     }
-    for (let i = 0; i < dimentionY; i++) {
-        let colmn = [];
-        for (let j = 0; j < dimentionX; j++) {
-            colmn.push(newMatrix[j][i]);
-        }
-        colmn = [];
-    }
-    console.log(newMatrix.join('\n').split(',').join(' '));
+    power++;
+  }
+  for (const row of matrix) {
+    console.log(row.join(" "));
+  }
 }
-orbit([5, 5, 2, 2]);
+orbit([7, 7, 0, 0]);
