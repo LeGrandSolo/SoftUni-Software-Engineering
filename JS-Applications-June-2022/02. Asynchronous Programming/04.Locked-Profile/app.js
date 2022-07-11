@@ -3,30 +3,30 @@ async function lockedProfile() {
   const data = await res.json();
   const main = document.querySelector("main");
   document.querySelector(".profile").remove();
-  for (const value of Object.values(data)) {
+  for (let i = 0; i < Object.values(data).length; i++) {
+    const value = Object.values(data)[i];
     const profile = document.createElement("div");
     profile.className = "profile";
     profile.innerHTML = `
-    <img src="./iconProfile2.png" class="userIcon" />
-    <label>Lock</label>
-    <input type="radio" name="${value.username}Locked" value="lock" checked>
-    <label>Unlock</label>
-    <input type="radio" name="${value.username}Locked" value="unlock"><br>
-    <hr>
-    <label>Username</label>
-    <input type="text" name="${value.username}" value="${value.username}" disabled readonly />
-    <div class="${value.username}">
-        <hr>
-        <label>Email:</label>
-        <input type="email" name="${value.email}" value="${value.email}" disabled readonly />
-        <label>Age:</label>
-        <input type="text" name="${value.age}" value="${value.age}" disabled readonly />
-    </div>
-    
-    <button>Show more</button>
-                    `;
+				<img src="./iconProfile2.png" class="userIcon" />
+				<label>Lock</label>
+				<input type="radio" name="user1Locked" value="lock" checked>
+				<label>Unlock</label>
+				<input type="radio" name="user1Locked" value="unlock"><br>
+				<hr>
+				<label>Username</label>
+				<input type="text" name="user1Username" value="${value.username}" disabled readonly />
+				<div id="user1HiddenFields">
+					<hr>
+					<label>Email:</label>
+					<input type="email" name="user1Email" value="${value.email}" disabled readonly />
+					<label>Age:</label>
+					<input type="text" name="user1Age" value="${value.age}" disabled readonly />
+				</div>
+				
+				<button>Show more</button> `;
     main.appendChild(profile);
-    const hiddenDiv = profile.querySelector(`.${value.username}`);
+    const hiddenDiv = profile.querySelector(`#user1HiddenFields`);
     const btn = profile.querySelector("button");
     hiddenDiv.style.display = "none";
     btn.addEventListener("click", (e) => {
