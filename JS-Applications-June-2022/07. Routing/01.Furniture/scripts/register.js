@@ -16,6 +16,7 @@ export async function register(ev) {
   try {
     const registerData = await request("POST", registerUrl, formData);
     sessionStorage.setItem("accessToken", registerData.accessToken);
+    sessionStorage.setItem("userId", registerData._id);
     console.log(sessionStorage.getItem("accessToken"));
     redirectToHome();
   } catch (e) {

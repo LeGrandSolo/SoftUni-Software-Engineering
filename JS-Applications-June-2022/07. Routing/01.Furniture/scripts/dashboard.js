@@ -1,4 +1,5 @@
 import {
+  createOrEditFurnitureTemplate,
   dashboardTemplate,
   detailsTemplate,
   myFurnitureTemplate,
@@ -6,6 +7,7 @@ import {
 import page from "../node_modules/page/page.mjs";
 import { logout } from "./logout.js";
 import { request } from "./api.js";
+import { createOrEdit } from "./createFurniture.js";
 let url = "/data/catalog";
 let outsideCtx;
 export async function showDashboard(ctx) {
@@ -32,11 +34,12 @@ export async function showMyFurniture(ctx) {
     console.log(error.message);
   }
 }
+let furnitUrl;
 export async function showDetails(ev) {
   ev.preventDefault();
   let id = ev.target.parentNode.parentNode.id;
-  url = `/data/catalog/${id}`;
-  const furnitureData = await request("GET", url);
+  furnitUrl = `/data/catalog/${id}`;
+  const furnitureData = await request("GET", furnitUrl);
   let isOwner = false;
   if (sessionStorage.getItem("userId") === furnitureData._ownerId) {
     isOwner = true;
@@ -46,7 +49,22 @@ export async function showDetails(ev) {
 export async function deleteFurniture(ev) {
   ev.preventDefault();
   alert("Delete?");
-  request("DELETE", url, null, sessionStorage.getItem("accessToken"));
+  await request(
+    "DELETE",
+    furnitUrl,
+    null,
+    sessionStorage.getItem("accessToken")
+  );
   redirectToHome();
 }
-export async function edit() {}
+export async function showEdit(ev) {
+  ev.preventDefault();
+  const furnitureData = await request("GET", furnitUrl);
+  console.log(furnitureData);
+  outsideCtx.render(
+    createOrEditFurnitureTemplate(outsideCtx, [], [], furnitureData, true)
+  );
+}
+export async function edit(ev) {
+  createOrEdit(ev, true, furnitUrl, outsideCtx);
+}

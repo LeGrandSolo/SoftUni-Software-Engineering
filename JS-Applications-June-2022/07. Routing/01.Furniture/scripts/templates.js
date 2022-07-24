@@ -149,7 +149,13 @@ const furnitureTemplate = (furniture, ctx) => html` <div class="col-md-4">
     </div>
   </div>
 </div>`;
-const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
+const createOrEditFurnitureTemplate = (
+  ctx,
+  validIds,
+  invalidIds,
+  values,
+  isEditing
+) => {
   function classes(field) {
     return {
       "form-control": true,
@@ -161,11 +167,11 @@ const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
     ${navTemplate(ctx, true)}
     <div class="row space-top">
       <div class="col-md-12">
-        <h1>Create New Furniture</h1>
+        <h1>${isEditing ? "Edit" : "Create New"} Furniture</h1>
         <p>Please fill all fields.</p>
       </div>
     </div>
-    <form @submit=${ctx.create}>
+    <form @submit=${isEditing ? ctx.edit : ctx.createOrEdit}>
       <div class="row space-top">
         <div class="col-md-4">
           <div class="form-group">
@@ -175,6 +181,7 @@ const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
               id="new-make"
               type="text"
               name="make"
+              .value=${values ? values.make : ""}
             />
           </div>
           <div class="form-group has-success">
@@ -184,6 +191,7 @@ const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
               id="new-model"
               type="text"
               name="model"
+              .value=${values ? values.model : ""}
             />
           </div>
           <div class="form-group has-danger">
@@ -193,6 +201,7 @@ const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
               id="new-year"
               type="number"
               name="year"
+              .value=${values ? values.year : ""}
             />
           </div>
           <div class="form-group">
@@ -204,6 +213,7 @@ const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
               id="new-description"
               type="text"
               name="description"
+              .value=${values ? values.description : ""}
             />
           </div>
         </div>
@@ -215,6 +225,7 @@ const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
               id="new-price"
               type="number"
               name="price"
+              .value=${values ? values.price : ""}
             />
           </div>
           <div class="form-group">
@@ -224,6 +235,7 @@ const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
               id="new-image"
               type="text"
               name="img"
+              .value=${values ? values.image : ""}
             />
           </div>
           <div class="form-group">
@@ -235,15 +247,19 @@ const createFurnitureTemplate = (ctx, validIds, invalidIds) => {
               id="new-material"
               type="text"
               name="material"
+              .value=${values ? values.material : ""}
             />
           </div>
-          <input type="submit" class="btn btn-primary" value="Create" />
+          <input type="submit" class="btn btn-primary" value=${isEditing ? "Edit" : "Create"} />
         </div>
       </div>
     </form>
   </div>`;
 };
-const detailsTemplate = (ctx, furniture, isOwner) => html` ${navTemplate(ctx)}
+const detailsTemplate = (ctx, furniture, isOwner) => html` ${navTemplate(
+    ctx,
+    true
+  )}
   <div class="container">
     <div class="row space-top">
       <div class="col-md-12">
@@ -270,7 +286,7 @@ const detailsTemplate = (ctx, furniture, isOwner) => html` ${navTemplate(ctx)}
             isOwner ? { display: "block" } : { display: "none" }
           )}
         >
-          <a href="/" class="btn btn-info">Edit</a>
+          <a href="/" @click=${ctx.showEdit} class="btn btn-info">Edit</a>
           <a href="/" @click=${ctx.delete} class="btn btn-red">Delete</a>
         </div>
       </div>
@@ -281,7 +297,7 @@ export {
   loginFormTemplate,
   registerTemplate,
   dashboardTemplate,
-  createFurnitureTemplate,
+  createOrEditFurnitureTemplate,
   myFurnitureTemplate,
   detailsTemplate,
 };

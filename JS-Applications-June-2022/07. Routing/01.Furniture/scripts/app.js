@@ -1,7 +1,14 @@
 import { render as litRender } from "../node_modules/lit-html/lit-html.js";
 import page from "../node_modules/page/page.mjs";
-import { create, showCreate } from "./createFurniture.js";
-import { showDashboard, showMyFurniture, showDetails, deleteFurniture, edit } from "./dashboard.js";
+import { createOrEdit, showCreate } from "./createFurniture.js";
+import {
+  showDashboard,
+  showMyFurniture,
+  showDetails,
+  deleteFurniture,
+  showEdit,
+  edit,
+} from "./dashboard.js";
 import { login, showLogin } from "./login.js";
 import { logout } from "./logout.js";
 import { register, showRegister } from "./register.js";
@@ -22,9 +29,10 @@ function decorateCtx(ctx, next) {
   ctx.logout = logout;
   ctx.login = login;
   ctx.register = register;
-  ctx.create = create;
+  ctx.createOrEdit = createOrEdit;
   ctx.showDetails = showDetails;
   ctx.delete = deleteFurniture;
+  ctx.showEdit = showEdit;
   ctx.edit = edit;
   next();
 }
