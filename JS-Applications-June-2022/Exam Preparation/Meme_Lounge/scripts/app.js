@@ -1,7 +1,9 @@
 import { litRender, page, html } from "./lib.js";
 import { renderLogin, renderRegister } from "./users.js";
-import { renderHome } from "./home.js";
+import { allMemes, renderHome } from "./home.js";
+import { showDetails } from "./showDetails.js";
 import { navTemplate } from "./navBar.js";
+import { createMeme } from "./createMeme.js";
 
 const main = document.querySelector("main");
 const body = document.querySelector("body");
@@ -29,9 +31,12 @@ const currentView = (template) => html`
 
 page(decorateCtx);
 page("/index.html", "/");
+page("/allMemes", allMemes)
+page("/allMemes/:id", showDetails)
 page("/", renderHome);
 page("/login", renderLogin);
 page("/register", renderRegister);
+page("/create-meme", createMeme)
 page.start();
 function renderMain(template) {
   litRender(currentView(template), body);

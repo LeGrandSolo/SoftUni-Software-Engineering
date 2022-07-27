@@ -1,6 +1,5 @@
 import { get } from "./api.js";
-import { html } from "./lib.js";
-import { navTemplate } from "./navBar.js";
+import { html, styleMap, page } from "./lib.js";
 import { getUserData } from "./util.js";
 
 const welcomeGuest = (ctx) => html`
@@ -20,7 +19,14 @@ const allMemesTemplate = (memes) => html`
     <!-- Display : All memes in database ( If any ) -->
     ${memes.map(memeCard)}
     <!-- Display : If there are no memes in database -->
-    <p class="no-memes">No memes in database.</p>
+    <p
+      class="no-memes"
+      style=${styleMap(
+        memes.length === 0 ? { display: "block" } : { display: "none" }
+      )}
+    >
+      No memes in database.
+    </p>
   </div>
 `;
 const memeCard = (meme) => html`
@@ -30,8 +36,8 @@ const memeCard = (meme) => html`
         <p class="meme-title">${meme.title}</p>
         <img class="meme-image" alt="meme-img" src=${meme.imageUrl} />
       </div>
-      <div id="data-buttons">
-        <a class="button" href="#">Details</a>
+      <div id="data-buttons" >
+        <a class="button" href="/allMemes/${meme._id}">Details</a>
       </div>
     </div>
   </div>
@@ -40,9 +46,12 @@ export async function renderHome(ctx) {
   const userData = getUserData();
   if (!userData) {
     ctx.render(welcomeGuest(ctx));
-  } else {
+  }else{
+    page.redirect('allMemes')
+  }
+}
+export async function allMemes(ctx) {
     const url = "/data/memes?sortBy=_createdOn%20desc";
     const memes = await get(url);
     ctx.render(allMemesTemplate(memes));
-  }
 }
