@@ -2,7 +2,7 @@ import { get } from "./api.js";
 import { html, styleMap, page } from "./lib.js";
 import { getUserData } from "./util.js";
 
-const welcomeGuest = (ctx) => html`
+const welcomeGuest = () => html`<section id="welcome">
   <div id="welcome-container">
     <h1>Welcome To Meme Lounge</h1>
     <img src="/images/welcome-meme.jpg" alt="meme" />
@@ -12,8 +12,8 @@ const welcomeGuest = (ctx) => html`
       <a href="/register" class="button">Register</a>
     </div>
   </div>
-`;
-const allMemesTemplate = (memes) => html`
+</section> `;
+const allMemesTemplate = (memes) => html`<section id="meme-feed">
   <h1>All Memes</h1>
   <div id="memes">
     <!-- Display : All memes in database ( If any ) -->
@@ -28,7 +28,7 @@ const allMemesTemplate = (memes) => html`
       No memes in database.
     </p>
   </div>
-`;
+</section> `;
 const memeCard = (meme) => html`
   <div class="meme">
     <div class="card">
@@ -36,7 +36,7 @@ const memeCard = (meme) => html`
         <p class="meme-title">${meme.title}</p>
         <img class="meme-image" alt="meme-img" src=${meme.imageUrl} />
       </div>
-      <div id="data-buttons" >
+      <div id="data-buttons">
         <a class="button" href="/allMemes/${meme._id}">Details</a>
       </div>
     </div>
@@ -46,12 +46,12 @@ export async function renderHome(ctx) {
   const userData = getUserData();
   if (!userData) {
     ctx.render(welcomeGuest(ctx));
-  }else{
-    page.redirect('allMemes')
+  } else {
+    page.redirect("allMemes");
   }
 }
 export async function allMemes(ctx) {
-    const url = "/data/memes?sortBy=_createdOn%20desc";
-    const memes = await get(url);
-    ctx.render(allMemesTemplate(memes));
+  const url = "/data/memes?sortBy=_createdOn%20desc";
+  const memes = await get(url);
+  ctx.render(allMemesTemplate(memes));
 }

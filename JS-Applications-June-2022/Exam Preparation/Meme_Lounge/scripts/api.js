@@ -31,7 +31,7 @@ export async function request(method, url, data) {
     }
     return await res.json();
   } catch (err) {
-    alert(err.message);
+    console.log(err.message);
     throw err;
   }
 }

@@ -1,6 +1,7 @@
 import { getFormData, post } from "./api.js";
+import { displayError } from "./app.js";
 import { html, page } from "./lib.js";
-const createMemeTemplate = (onSubmit) => html`
+const createMemeTemplate = (onSubmit) => html`<section id="create-meme">
   <form id="create-form" @submit=${onSubmit}>
     <div class="container">
       <h1>Create Meme</h1>
@@ -22,7 +23,7 @@ const createMemeTemplate = (onSubmit) => html`
       <input type="submit" class="registerbtn button" value="Create Meme" />
     </div>
   </form>
-`;
+</section> `;
 export function createMeme(ctx) {
   const url = "/data/memes";
   ctx.render(createMemeTemplate(onSubmit));
@@ -37,7 +38,7 @@ export function createMeme(ctx) {
       const result = await post(url, data);
       page.redirect("/");
     } catch (error) {
-      alert(error.message);
+      displayError(error.message);
     }
   }
 }
