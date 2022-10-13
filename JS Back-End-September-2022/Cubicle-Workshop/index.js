@@ -8,6 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 
 require("./config/express")(app);
 require("./config/routes")(app);
+require("./config/mongoose")()
 
 
 app.listen(

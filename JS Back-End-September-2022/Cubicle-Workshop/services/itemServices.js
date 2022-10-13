@@ -1,37 +1,32 @@
-const database = require("../config/database.json");
+const Cube = require("../models/Item");
+
 const fs = require("fs").promises;
-class Item {
-  constructor({ name, description, imageUrl, difficultyLevel, _id }) {
-    this._id = _id;
-    this.name = name;
-    this.description = description;
-    this.imageUrl = imageUrl;
-    this.difficultyLevel = difficultyLevel;
-  }
-}
 
 async function retrieveData(search = "", from = 1, to = 6) {
-  const data = JSON.parse(await fs.readFile("./config/database.json"));
-  const filtered = data
-    .filter((r) => r.name.toLowerCase().includes(search.toLowerCase()))
-    .filter((r) => r.difficultyLevel >= from)
-    .filter((r) => r.difficultyLevel <= to);
-  return filtered;
+  const data = await Cube.find({})
+    .where("name")
+    .regex(search)
+    .where("difficultyLevel")
+    .gte(from)
+    .lte(to)
+    .lean();
+  return data;
 }
 
-async function getById(id) {
-  return (await retrieveData()).find((r) => r._id === id);
-}
-
-function generateID() {
-  return ("00000" + Math.random() * 999999 || 0).slice(-5);
+async function isCollectionEmpty() {
+  if (!(await Cube.findOne({}).where("name").regex(""))) {
+    return true;
+  }
+  return false;
 }
 
 async function create(formData) {
-  const data = await retrieveData();
-  console.log(data);
-  formData._id = generateID();
-  data.push(new Item(formData));
-  await fs.writeFile("./config/database.json", JSON.stringify(data));
+  const cube = new Cube({
+    name: formData.name,
+    description: formData.description,
+    imageUrl: formData.imageUrl,
+    difficultyLevel: formData.difficultyLevel,
+  });
+  cube.save();
 }
-module.exports = { create, retrieveData, getById };
+module.exports = { create, retrieveData, isCollectionEmpty };
