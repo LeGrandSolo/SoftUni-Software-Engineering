@@ -1,12 +1,13 @@
 const { create } = require("../services/itemServices");
 
-const router = require("express").Router();
-router.get("/", (req, res) => {
+const createController = require("express").Router();
+createController.get("/", (req, res) => {
   res.render("create", { title: "Create Cube Page" });
 });
-router.post("/", async (req, res) => {
+createController.post("/", async (req, res) => {
   create(req.body);
+  res.status(302);
   res.redirect("/");
 });
 
-module.exports = router;
+module.exports = createController;
