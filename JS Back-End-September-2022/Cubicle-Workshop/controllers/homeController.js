@@ -1,4 +1,4 @@
-const { retrieveData, isCollectionEmpty } = require("../services/itemServices");
+const { retrieveData: retrieveItem, isCollectionEmpty } = require("../services/itemServices");
 
 const homeController = require("express").Router();
 
@@ -6,15 +6,15 @@ homeController.get("/", async (req, res) => {
   const search = req.query.search || "";
   const from = req.query.from || 1;
   const to = req.query.to || 6;
-  const cubes = await retrieveData(search, from, to);
+  const cubes = await retrieveItem(search, from, to);
   if (!cubes.length) {
-    console.log(await isCollectionEmpty());
     if (!(await isCollectionEmpty())) {
       res.status(302);
       res.redirect("/");
     }
+  }else{
+    res.render("index", { cubes });
   }
-  res.render("index", { cubes });
 });
 
 module.exports = homeController;

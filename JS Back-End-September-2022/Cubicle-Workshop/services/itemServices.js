@@ -1,11 +1,9 @@
 const Cube = require("../models/Item");
 
-const fs = require("fs").promises;
-
-async function retrieveData(search = "", from = 1, to = 6) {
+async function retrieveItem(search = "", from = 1, to = 6) {
   const data = await Cube.find({})
     .where("name")
-    .regex(search)
+    .regex(new RegExp(search, "i"))
     .where("difficultyLevel")
     .gte(from)
     .lte(to)
@@ -20,6 +18,10 @@ async function isCollectionEmpty() {
   return false;
 }
 
+async function getById(id) {
+  return await Cube.findById(id).lean();
+}
+
 async function create(formData) {
   const cube = new Cube({
     name: formData.name,
@@ -29,4 +31,4 @@ async function create(formData) {
   });
   cube.save();
 }
-module.exports = { create, retrieveData, isCollectionEmpty };
+module.exports = { create, retrieveData: retrieveItem, isCollectionEmpty, getById };
