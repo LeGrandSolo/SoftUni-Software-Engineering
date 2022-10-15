@@ -3,17 +3,17 @@ const { Schema, model } = require("mongoose");
 const accessorySchema = new Schema({
   name: { type: String, required: true },
   imageUrl: {
-    type: String /* 
+    type: String,
     validate: {
-      validator: (v) => {
-        const regex = new RegExp("/^https?://");
-        return regex(v);
+      validator: (value) => {
+        const regex = new RegExp("^https?://");
+        return regex.test(value);
       },
-    }, */,
+    },
   },
   description: { type: String },
-  cubes: { type: String, required: true },
+  cubes: [{ type: Schema.Types.ObjectId, ref: "Cube" }],
 });
 const Accessory = model("Accessory", accessorySchema);
 
-module.exports(Accessory);
+module.exports = Accessory;

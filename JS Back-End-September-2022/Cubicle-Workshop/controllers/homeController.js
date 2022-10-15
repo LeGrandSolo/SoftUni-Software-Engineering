@@ -1,4 +1,4 @@
-const { retrieveData: retrieveItem, isCollectionEmpty } = require("../services/itemServices");
+const { retrieveData: retrieveItem, isCollectionEmpty } = require("../services/cubeServices");
 
 const homeController = require("express").Router();
 

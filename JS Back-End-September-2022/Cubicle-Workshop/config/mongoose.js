@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Cube = require("../models/Item");
 
 const connStr = "mongodb://localhost:27017/cubicle";
 

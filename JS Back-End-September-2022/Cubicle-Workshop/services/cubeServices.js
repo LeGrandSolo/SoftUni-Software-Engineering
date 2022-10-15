@@ -1,4 +1,4 @@
-const Cube = require("../models/Item");
+const Cube = require("../models/Cube");
 
 async function retrieveItem(search = "", from = 1, to = 6) {
   const data = await Cube.find({})
@@ -29,6 +29,10 @@ async function create(formData) {
     imageUrl: formData.imageUrl,
     difficultyLevel: formData.difficultyLevel,
   });
-  cube.save();
+  try {
+    await cube.save();
+  } catch (err) {
+    console.log(err._message);
+  }
 }
 module.exports = { create, retrieveData: retrieveItem, isCollectionEmpty, getById };

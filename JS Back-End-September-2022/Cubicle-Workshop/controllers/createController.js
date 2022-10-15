@@ -1,4 +1,4 @@
-const { create } = require("../services/itemServices");
+const { create } = require("../services/cubeServices");
 
 const createController = require("express").Router();
 createController.get("/", (req, res) => {
