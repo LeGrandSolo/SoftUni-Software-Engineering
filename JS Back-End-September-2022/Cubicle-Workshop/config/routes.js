@@ -5,6 +5,8 @@ const createController = require("../controllers/createController");
 const detailsController = require("../controllers/detailsController");
 const addAccessoryController = require("../controllers/addAccessoryController");
 const attachAccessoryController = require("../controllers/attachAccessory");
+const loginController = require("../controllers/loginController");
+const registerController = require("../controllers/registerController");
 
 module.exports = (app) => {
   app.use(homeController);
@@ -12,6 +14,8 @@ module.exports = (app) => {
   app.use("/create", createController);
   app.use("/create/accessory", addAccessoryController);
   app.use("/attach/accessory", attachAccessoryController);
+  app.use("/login", loginController);
+  app.use("/register", registerController);
   app.use(detailsController);
   app.all("*", defaultController);
 };
