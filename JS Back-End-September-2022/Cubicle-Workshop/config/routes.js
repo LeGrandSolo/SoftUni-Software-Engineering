@@ -20,6 +20,6 @@ module.exports = (app) => {
   app.use("/login", loginController);
   app.use("/register", registerController);
   app.use("/logout", logoutController);
-  app.use(detailsController);
+  app.use("/details",detailsController);
   app.all("*", defaultController);
 };

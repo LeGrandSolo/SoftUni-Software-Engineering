@@ -13,7 +13,7 @@ homeController.get("/", async (req, res) => {
   cubes.forEach((c) => (c.isLogged = res.isLogged));
   if (!cubes.length) {
     if (!(await isCollectionEmpty())) {
-      res.status(302);
+      res.status(308);
       res.redirect("/");
     }
   } else {

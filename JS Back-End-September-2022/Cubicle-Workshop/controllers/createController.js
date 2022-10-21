@@ -11,7 +11,7 @@ createController.get("/", (req, res) => {
 });
 createController.post("/", async (req, res) => {
   await create(req.body, req.cookies.jwt);
-  res.status(302);
+  res.status(308);
   res.redirect("/");
 });
 

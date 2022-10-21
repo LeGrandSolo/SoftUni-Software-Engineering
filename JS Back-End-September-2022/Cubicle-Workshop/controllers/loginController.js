@@ -10,7 +10,7 @@ loginController.post("/", async (req, res) => {
   try {
     const user = await login(req.body);
     res.cookie("jwt", jwtSign(user));
-    res.status(302);
+    res.status(308);
     res.redirect("/");
   } catch (error) {
     res.render("login", {

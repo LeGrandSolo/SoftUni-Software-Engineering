@@ -8,7 +8,7 @@ const attachAccessoryController = require("express").Router();
 
 attachAccessoryController.get("/:id", async (req, res) => {
   if (!res.isLogged) {
-    res.status(302);
+    res.status(308);
     res.redirect("/");
     return;
   }
@@ -23,7 +23,7 @@ attachAccessoryController.get("/:id", async (req, res) => {
 
 attachAccessoryController.post("/:id", (req, res) => {
   attachAccessory(req.params.id, req.body);
-  res.status(302);
+  res.status(308);
   res.redirect("/");
 });
 

@@ -2,7 +2,7 @@ const logoutController = require("express").Router();
 
 logoutController.get("/", (req, res) => {
   res.clearCookie("jwt");
-  res.status(302);
+  res.status(308);
   res.redirect("/");
 });
 

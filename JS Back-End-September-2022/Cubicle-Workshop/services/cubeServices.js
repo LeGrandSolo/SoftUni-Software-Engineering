@@ -39,12 +39,10 @@ async function create(formData, token) {
   }
 }
 async function getCubeDetails(req) {
-  console.log(req.params);
   const cube = await Cube.findById(req.params.id)
     .populate("accessories")
     .populate("creator")
     .lean();
-  console.log(cube);
   if (cube.creator.username === jwtDecode(req.cookies.jwt).username) {
     cube.isOwner = true;
   }
