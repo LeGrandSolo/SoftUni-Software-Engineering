@@ -1,15 +1,15 @@
-const { getById } = require("../services/cubeServices");
+const { getById, getCubeDetails } = require("../services/cubeServices");
 const defaultController = require("../controllers/defaultController");
 const Cube = require("../models/Cube");
+const retrieveUserByName = require("../utils/userUtil");
+const { jwtDecode } = require("../utils/jwtUtil");
 const detailsController = require("express").Router();
 
 detailsController.get("/details/:id", async (req, res) => {
-  const item = await Cube.findById(req.params.id)
-    .populate("accessories")
-    .lean();
-  if (item) {
+  const cube = await getCubeDetails(req);
+  if (cube) {
     res.render("details", {
-      item,
+      item: cube,
     });
   } else {
     return defaultController(req, res);

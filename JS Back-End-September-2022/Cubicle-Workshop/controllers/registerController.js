@@ -1,4 +1,5 @@
-const { register } = require("../services/userServices");
+const { register } = require("../services/authServices");
+const { jwtSign } = require("../utils/jwtUtil");
 
 const registerController = require("express").Router();
 
@@ -7,12 +8,16 @@ registerController.get("/", (req, res) => {
 });
 registerController.post("/", async (req, res) => {
   try {
-    await register(req.body);
+    const user = await register(req.body);
+    res.cookie("jwt", jwtSign(user));
+    res.status(302);
+    res.redirect("/");
   } catch (error) {
-    console.log(error);
+    res.render("register", {
+      error: error.message,
+    });
+    console.log(error.message);
   }
-  res.status(302);
-  res.redirect("/");
 });
 
 module.exports = registerController;

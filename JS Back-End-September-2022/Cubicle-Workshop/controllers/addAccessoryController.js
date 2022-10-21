@@ -7,6 +7,11 @@ const { getById } = require("../services/cubeServices");
 const addAccessoryController = require("express").Router();
 
 addAccessoryController.get("/", (req, res) => {
+  if (!res.isLogged) {
+    res.status(302);
+    res.redirect("/");
+    return;
+  }
   res.render("addAccessory", {
     title: "Attach Accessory",
   });
@@ -16,6 +21,5 @@ addAccessoryController.post("/", async (req, res) => {
   res.status(302);
   res.redirect("/");
 });
-
 
 module.exports = addAccessoryController;
