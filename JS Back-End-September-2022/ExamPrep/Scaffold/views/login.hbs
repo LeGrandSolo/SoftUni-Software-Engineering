@@ -1,6 +1,11 @@
 <h1>Login</h1>
+{{#if error}}
+  {{#with error}}
+    {{>errorMessagePartial}}
+  {{/with}}
+{{/if}}
 <form method="POST" action="/auth/login">
-  <label>Username <input type="text" /></label>
-  <label>Password <input type="password" /></label>
+  <label>Username <input type="text" name="username"{{#if error.fields.username}}style="border: solid red 1px;"{{/if}}{{#if body}}value = "{{body.username}}"{{/if}}/></label>
+  <label>Password <input type="password" name="password" {{#if error.fields.password}}style="border: solid red 1px;"{{/if}}{/></label>
   <button>Submit</button>
 </form>

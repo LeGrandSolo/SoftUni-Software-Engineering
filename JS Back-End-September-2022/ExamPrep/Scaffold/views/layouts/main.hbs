@@ -1,13 +1,15 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>{{title}}</title>
-</head>
-<body>
+  </head>
+  <body>
     <a href="/">Home</a>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/register">Register</a>
+    {{#unless logged}}
+      <a href="/auth/login">Login</a>
+      <a href="/auth/register">Register</a>
+    {{/unless}}
+    {{#if logged}}<a href="/auth/logout">Logout</a>{{/if}}
     {{{body}}}
-</body>
+  </body>
 </html>

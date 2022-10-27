@@ -1,7 +1,12 @@
 <h1>Register</h1>
+{{#if error}}
+  {{#with error}}
+    <div>{{#each messages}}{{this}}{{/each}}</div>
+  {{/with}}
+{{/if}}
 <form method="POST" action="/auth/register">
-  <label>Username <input type="text" name="username"/></label>
-  <label>Password <input type="password" name="password"/></label>
-  <label>Repeat <input type="password" name="repass"/></label>
+  <label>Username <input type="text" name="username" {{#if error.fields.username}}style="border: solid red 1px;"{{/if}}{{#if body}}value = "{{body.username}}"{{/if}}/></label>
+  <label>Password <input type="password" name="password" {{#if error.fields.password}}style="border: solid red 1px;"{{/if}}/></label>
+  <label>Repeat <input type="password" name="repass" {{#if error.fields.repass}}style="border: solid red 1px;"{{/if}}/></label>
   <button>Submit</button>
 </form>
