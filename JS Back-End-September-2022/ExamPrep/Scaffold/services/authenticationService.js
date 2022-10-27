@@ -19,7 +19,9 @@ async function register(username, password) {
   //TODO validate username and password according to assignment
   const existing = await User.findOne({ username: username });
   if (existing) {
-    throw new Error("User with this name already exists!");
+    const error = new Error("User with this name already exists!")
+    error.fields = "username"
+    throw error;
   }
   const user = new User({
     username: username,

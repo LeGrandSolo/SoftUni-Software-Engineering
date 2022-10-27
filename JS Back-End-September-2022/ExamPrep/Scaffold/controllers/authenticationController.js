@@ -1,6 +1,7 @@
 const { body, check, validationResult } = require("express-validator");
 
 const { login, register } = require("../services/authenticationService");
+const parseError = require("../utils/errorParser");
 
 const authenticationController = require("express").Router();
 
@@ -31,9 +32,9 @@ authenticationController.post(
   body("repass").notEmpty().withMessage("All fields required!"),
   async (req, res) => {
     try {
-      const errors = validationResult(req).errors;
-      if (errors.length > 0) {
-        throw errors;
+      const error = validationResult(req).errors
+      if (error.length > 0) {
+        throw error;
       }
       //TODO validate accordingly
       if (req.body.password !== req.body.repass) {
@@ -43,6 +44,7 @@ authenticationController.post(
       res.cookie("token", token);
       res.redirect("/");
     } catch (err) {
+      err = parseError(err)
       console.log(err);
       res.render("register", { title: "Register" });
     }
