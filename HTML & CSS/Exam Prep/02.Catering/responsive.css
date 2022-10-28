@@ -1,0 +1,11 @@
+@media screen and (max-width: 600px) {
+  .w3-right, #about .w3-round.w3-image {
+    display: none;
+  }
+  #about .w3-col.m6{
+    width: 100%;
+  }
+  #menu .w3-col{
+    width: 100%;
+  }
+}
