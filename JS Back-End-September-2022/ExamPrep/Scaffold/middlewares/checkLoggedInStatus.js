@@ -2,18 +2,17 @@ const { verifyToken } = require("../utils/jwt");
 
 function checkLoggedInStatus(req, res, next) {
   try {
+    req.locals = {}
     if (req.cookies.token) {
-      verifyToken(req.cookies.token);
-      req.isLogged = true;
+      const data = verifyToken(req.cookies.token);
+      req.locals.isLogged = true;
+      req.locals.username = data.payload.username
       res.locals.logged = true;
-      console.log("True");
     } else {
       req.isLogged = false;
-      console.log("False");
     }
   } catch (error) {
     console.log(error);
-    console.log("False");
     res.clearCookie("token");
     req.isLogged = false;
   }

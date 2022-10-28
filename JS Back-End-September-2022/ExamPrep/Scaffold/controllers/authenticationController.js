@@ -7,7 +7,7 @@ const newErrorWithFields = require("../utils/newErrorWithField");
 const authenticationController = require("express").Router();
 
 authenticationController.get("/login", (req, res) => {
-  if (req.isLogged) {
+  if (req.locals.isLogged) {
     res.redirect("/")
   }else{
     res.render("login", { title: "Login" });
@@ -37,7 +37,7 @@ authenticationController.post(
 );
 
 authenticationController.get("/register", (req, res) => {
-  if (req.isLogged) {
+  if (req.locals.isLogged) {
     res.redirect("/")
   }else{
     res.render("register", { title: "Register" });
