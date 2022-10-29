@@ -7,7 +7,7 @@ async function fetchItems(id) {
 }
 async function deleteItem(id) {
     const item = await Item.findById(id)
-    if (req.username !== item.owner) {
+    if (req.locals.username !== item.owner) {
         throw new Error("You are not the owner!")
     }
     await item.remove()

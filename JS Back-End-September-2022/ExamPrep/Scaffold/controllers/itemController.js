@@ -4,7 +4,7 @@ const errorCookie = require("../utils/errorCookie");
 const itemController = require("express").Router();
 
 itemController.get("/create", (req, res) => {
-  if (!req.username) {
+  if (!req.locals.username) {
     res.redirect("/");
   } else {
     res.render("/create");
@@ -12,7 +12,7 @@ itemController.get("/create", (req, res) => {
 });
 itemController.post("/create", async (req, res) => {
   try {
-    if (!req.username) {
+    if (!req.locals.username) {
       throw new Error("You are not logged in!");
     }
   } catch (error) {
@@ -37,7 +37,7 @@ itemController.get("/:id/details", async (req, res) => {
 itemController.get("/:id/edit", async (req, res) => {
   try {
     const item = await fetchItems(req.params.id);
-    if (req.username !== item.owner) {
+    if (req.locals.username !== item.owner) {
       throw new Error("You are not the owner!");
     }
     res.render("edit", { item });
