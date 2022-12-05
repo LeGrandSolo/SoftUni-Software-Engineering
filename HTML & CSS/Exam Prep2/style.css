@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Dancing+Script&display=swap");
+* {
+  font-family: "Courgette", cursive;
+
+  font-family: "Dancing Script", cursive;
+  font-weight: bold;
+  background-color: whitesmoke;
+}
+.header {
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+p,
+h2 {
+  background-color: white;
+}
+h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+.header p {
+  background-color: whitesmoke;
+  color: rgb(199, 0, 0);
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  position: absolute;
+  right: 41.5%;
+  top: 95%;
+}
+.list {
+  max-width: 80vw;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+  justify-content: space-evenly;
+}
+li {
+  max-width: 100%;
+  background-color: white;
+}
+img {
+  width: 100%;
+}
+.container {
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.container h1 {
+  background-color: white;
+}
+button {
+  border: none;
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+p{
+    font-size: 1.2rem;
+    margin: 0 auto;
+    text-align: center;
+}
+.arrow {
+  color: white;
+  background-color: red;
+  border-radius: 100%;
+  font-size: 1.2rem;
+  width: 3rem;
+  margin-left: 12px;
+  font-family: 'Courier New', Courier, monospace;
+}
