@@ -1,21 +1,28 @@
 <div class="theme-container" *ngFor="let theme of themes">
-    <div class="theme-name-wrapper">
-      <div class="theme-name">
-        <a href="#" class="normal">
-          <h2>{{theme.themeName}}</h2>
-        </a>
-        <div class="columns">
-          <div>
-            <p>Date: <time>{{theme.created_at}}</time></p>
-            <div class="nick-name">
-              <p>Username: <span>{{theme.userId.username}}</span></p>
-            </div>
+  <div class="theme-name-wrapper">
+    <div class="theme-name">
+      <a routerLink="/themes/{{ theme._id }}" class="normal">
+        <h2>{{ theme.themeName }}</h2>
+      </a>
+      <div class="columns">
+        <div>
+          <p>
+            Date: <time>{{ theme.created_at }}</time>
+          </p>
+          <div class="nick-name">
+            <p>
+              Username: <span>{{ theme.userId.username }}</span>
+            </p>
           </div>
-          <div class="subscribers">
-            <!-- <button class="subscribe">Subscribe</button> -->
-            <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
-          </div>
+        </div>
+        <div class="subscribers">
+          <button *ngIf="isLogged && !theme.subscribers.includes(userId)" class="subscribe">Subscribe</button>
+          <button *ngIf="isLogged && theme.subscribers.includes(userId)" class="unsubscribe">Unsubscribe</button>
+          <p>
+            Subscribers: <span>{{ theme.subscribers.length }}</span>
+          </p>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
+import { UserService } from 'src/app/user/user.service';
+import { IStateUser } from 'src/app/user/userInterface';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  isLogged: boolean = false;
+  get isLogged() {
+    return this.userService.isLogged;
+  }
+  get username() {
+    return this.userService.user?.username;
+  }
+  constructor(private userService: UserService) {}
 }
