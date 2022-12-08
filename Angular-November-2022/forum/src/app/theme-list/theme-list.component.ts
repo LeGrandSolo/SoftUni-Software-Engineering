@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { ITheme } from '../interfaces/theme';
-import { ThemeApiService } from '../theme-api.service';
+import { ThemeApiService, } from '../theme-api.service';
 import { UserService } from '../user/user.service';
 
 @Component({

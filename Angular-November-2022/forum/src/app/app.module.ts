@@ -11,10 +11,11 @@ import { RecentListComponent } from './recent-list/recent-list.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ThemeContentComponent } from './theme-content/theme-content.component';
 
 
 @NgModule({
-  declarations: [AppComponent, ThemeListComponent, RecentListComponent, MainComponent, HomeComponent, NotFoundComponent,],
+  declarations: [AppComponent, ThemeListComponent, RecentListComponent, MainComponent, HomeComponent, NotFoundComponent, ThemeContentComponent,],
   imports: [BrowserModule, AppRoutingModule, CoreModule, HttpClientModule, RouterModule],
   providers: [],
   bootstrap: [AppComponent],
