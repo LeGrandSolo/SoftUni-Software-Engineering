@@ -2,17 +2,17 @@
   <h1>SkillEarner</h1>
   <ul class="header-list">
     <span class="general-nav"
-      ><li><a href="">Home</a></li>
-      <li><a href="">All Lessons</a></li>
-      <li><a href="">About</a></li></span
+      ><li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/all-lessons">All Lessons</a></li>
+      <li><a routerLink="/about">About</a></li></span
     >
     <span class="auth-nav"
-      ><li><a href="">Login</a></li>
-      <li><a href="">Regiser</a></li></span
+      ><li><a routerLink="/auth/login">Login</a></li>
+      <li><a routerLink="/auth/register">Regiser</a></li></span
     >
     <span *ngIf="false" class="auth-nav"
-      ><li><a href="">Post new Lesson</a></li>
-      <li><a href="">Logout</a></li></span
+      ><li><a routerLink="/post-new">Post new Lesson</a></li>
+      <li><a routerLink="/auth/logout">Logout</a></li></span
     >
   </ul>
 </div>

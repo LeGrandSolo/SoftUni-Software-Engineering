@@ -1,0 +1,21 @@
+.home{
+    border-radius: 0.5em;
+    background-color: #def2f1;
+    margin: 0, auto;
+    text-align: center;
+    padding: 24px;
+}
+.auth-buttons{
+    margin-top: 24px;
+}
+a{
+    background-color: #17252A;
+    color: #def2f1;
+    padding: 0.5em;
+    margin-right: 48px;
+    border-radius: 0.2em;
+}
+a:hover {
+    background-color: #17252ae3;
+    transition: 0.5s;
+  }

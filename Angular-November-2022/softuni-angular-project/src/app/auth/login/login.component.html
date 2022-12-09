@@ -1,0 +1,10 @@
+<div class="form">
+  <form #loginForm="ngForm" (ngSubmit)="submitForm()">
+    <label for="username">Username</label>
+    <input type="text" id="username" requied minlength="3" #username="ngModel" ngModel name="username"/>
+    <span *ngIf="username.errors">Username must be at least 3 characters long!</span>
+    <label for="pass">Password</label>
+    <input type="password" id="pass" required minlength="6" ngModel name="pass"  />
+    <button>Log in</button>
+  </form>
+</div>
