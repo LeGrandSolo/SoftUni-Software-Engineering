@@ -31,8 +31,9 @@ export class LoginComponent {
         password: this.form.controls['password'].value,
       })
       .subscribe({
-        next: (v) => {
+        next: (v: any) => {
           console.log(v);
+          this.authService.setUserData(v);
           this.router.navigate(['/']);
         },
         error: (err) => {

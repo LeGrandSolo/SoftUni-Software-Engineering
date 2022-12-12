@@ -5,7 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ErrorService {
-  errorsSub$ = new BehaviorSubject({});
+  private errorsSub$ = new BehaviorSubject({});
+  errorObservable = this.errorsSub$.asObservable()
   constructor() {}
   emitErrors(errors: Object) {
     this.errorsSub$.next(errors);

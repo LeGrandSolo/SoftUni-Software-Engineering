@@ -6,12 +6,13 @@
       <li><a routerLink="/all-lessons">All Lessons</a></li>
       <li><a routerLink="/about">About</a></li></span
     >
-    <span class="auth-nav"
+    <span class="auth-nav" *ngIf="!userData"
       ><li><a routerLink="/auth/login">Login</a></li>
       <li><a routerLink="/auth/register">Regiser</a></li></span
     >
-    <span *ngIf="false" class="auth-nav"
-      ><li><a routerLink="/post-new">Post new Lesson</a></li>
+    <span *ngIf="userData" class="auth-nav">
+      <li><a>Hello, {{ userData.username }}</a></li>
+      <li><a routerLink="/post-new">Post new Lesson</a></li>
       <li><a routerLink="/auth/logout">Logout</a></li></span
     >
   </ul>

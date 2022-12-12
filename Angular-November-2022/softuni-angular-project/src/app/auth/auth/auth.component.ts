@@ -9,7 +9,7 @@ import { ErrorService } from 'src/app/shared/error.service';
 export class AuthComponent {
   errors: Object = {};
   constructor(private errorService: ErrorService) {
-    this.errorService.errorsSub$.subscribe({
+    this.errorService.errorObservable.subscribe({
       next: (err: Object) => {
         this.errors = err;
       },
