@@ -1,30 +1,20 @@
-.form {
-  margin: 0 auto;
-  text-align: center;
-  border-radius: 0.5em;
-  background-color: #def2f1;
-
-  padding: 24px;
-}
-label {
-  display: block;
-  margin: 12px 0;
+.login-content {
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 0.5em;
+    background-color: #def2f1;
+    padding: 24px;
+  }
+input.ng-invalid.ng-touched{
+  border-left: solid 5px red;
 }
 input{
-    border: none;
-    background-color: #feffff;
-    border-radius: 0.2em;
-}
-input:focus{
-    outline: none;
-}
-button {
   display: block;
-  background-color: #17252a;
-  color: #def2f1;
-  padding: 0.5em;
   margin: 0 auto;
-  margin-top: 12px;
-  border: none;
-  border-radius: 0.2em;
+    text-align: center;
+}
+.error-field{
+  float: right;
+  background-color: red;
+  color: #feffff;
 }

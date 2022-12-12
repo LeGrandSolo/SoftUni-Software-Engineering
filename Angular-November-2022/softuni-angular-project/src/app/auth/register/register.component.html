@@ -1,1 +1,37 @@
-<p>register works!</p>
+<div class="register-content">
+    <h3>Register</h3>
+    <form #registerForm="ngForm" (ngSubmit)="submitForm()">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        requied
+        minlength="3"
+        #username="ngModel"
+        ngModel
+        name="username"
+      />
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        requied
+        minlength="3"
+        email
+        #username="ngModel"
+        ngModel
+        name="email"
+      />
+      <label for="pass">Password</label>
+      <input
+        type="password"
+        id="pass"
+        required
+        minlength="6"
+        ngModel
+        name="password"
+      />
+      <button>Register</button>
+    </form>
+  </div>
+  
