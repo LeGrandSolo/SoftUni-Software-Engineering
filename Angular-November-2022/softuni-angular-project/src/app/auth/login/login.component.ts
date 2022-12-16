@@ -32,8 +32,7 @@ export class LoginComponent {
       })
       .subscribe({
         next: (v: any) => {
-          console.log(v);
-          this.authService.setUserData(v);
+          this.authService.setUserData(v,false);
           this.router.navigate(['/']);
         },
         error: (err) => {

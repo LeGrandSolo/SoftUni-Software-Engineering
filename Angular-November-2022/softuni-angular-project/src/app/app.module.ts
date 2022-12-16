@@ -9,10 +9,11 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CourseModule } from './course/course.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent],
-  imports: [BrowserModule, AppRoutingModule, RouterModule,HttpClientModule,BrowserAnimationsModule],
+  imports: [BrowserModule, AppRoutingModule, RouterModule,HttpClientModule,BrowserAnimationsModule,CourseModule],
   providers: [],
   bootstrap: [AppComponent],
 })
