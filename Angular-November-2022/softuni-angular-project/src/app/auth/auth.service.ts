@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiService } from '../core/api.service';
 import { ErrorService } from '../shared/error.service';
 
@@ -79,5 +79,8 @@ export class AuthService {
       let userData = {};
       return this.api.get('/users/me', null, userDataStorage.sessionToken)
     }
+    return new Observable((observer)=>{
+      observer.error(new Error("Not logged in!"))
+    })
   }
 }

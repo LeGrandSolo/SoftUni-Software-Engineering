@@ -6,13 +6,13 @@
       <p>{{ course.description }}</p>
       <p>Price: {{ course.price }}$</p>
       <p>Topics: Maths, Travel</p>
-      <div class="another-user">
-        <button id="buy">Buy</button>
-        <button id="add-to-favorites">Add to favorites</button>
+      <div *ngIf="!isOwner && isLogged" class="another-user">
+        <button class="blue-btn">Buy</button>
+        <button class="red-btn">Add to favorites</button>
       </div>
-      <div *ngIf="false" class="creator">
-        <button>Edit</button>
-        <button>Delete</button>
+      <div *ngIf="isOwner" class="creator">
+        <button class="blue-btn">Edit</button>
+        <button class="red-btn">Delete</button>
       </div>
     </div>
     <div class="user-container">
