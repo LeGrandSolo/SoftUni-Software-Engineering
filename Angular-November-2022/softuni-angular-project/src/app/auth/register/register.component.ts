@@ -13,12 +13,10 @@ export class RegisterComponent {
   @ViewChild('registerForm') form!: NgForm;
   errors: {
     username: string[];
-    email: string[];
     password: string[];
     other: string[];
   } = {
     username: [],
-    email: [],
     password: [],
     other: [],
   };
@@ -30,28 +28,35 @@ export class RegisterComponent {
   ) {}
   submitForm() {
     this.errors = this.authService.validateFields(this.form, true);
-    this.api
-      .post('/users', {
-        username: this.form.controls['username'].value,
-        email: this.form.controls['email'].value,
-        password: this.form.controls['password'].value,
-      })
-      .subscribe({
-        next: (v: any) => {
-          console.log(v);
-          
-          this.authService.setUserData(v,true);
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          if (err.error.code === 101) {
-            this.errors.other.push('Incorrect username or password');
-          } else {
-            this.errors.other.push(`${err.error.message}`);
-          }
-          return this.errorService.emitErrors(this.errors);
-        },
-      });
-    return null;
+    if (
+      this.errors.username.length === 0 &&
+      this.errors.password.length === 0 &&
+      this.errors.other.length === 0
+    ) {
+      this.api
+        .post('/users', {
+          username: this.form.controls['username'].value,
+          email: this.form.controls['email'].value,
+          password: this.form.controls['password'].value,
+        })
+        .subscribe({
+          next: (v: any) => {
+            console.log(v);
+
+            this.authService.setUserData(v, true);
+            this.router.navigate(['/']);
+          },
+          error: (err) => {
+            if (err.error.code === 101) {
+              this.errors.other.push('Incorrect username or password');
+            } else {
+              this.errors.other.push(err.error.error);
+            }
+            return this.errorService.emitErrors(this.errors);
+          },
+        });
+    } else {
+      return this.errorService.emitErrors(this.errors);
+    }
   }
 }

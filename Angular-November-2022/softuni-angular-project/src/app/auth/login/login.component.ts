@@ -25,7 +25,8 @@ export class LoginComponent {
 
   submitForm() {
     this.errors = this.authService.validateFields(this.form, false);
-    this.api
+    if (this.errors.username.length === 0 && this.errors.password.length === 0) {
+      this.api
       .get('/login', {
         username: this.form.controls['username'].value,
         password: this.form.controls['password'].value,
@@ -39,11 +40,13 @@ export class LoginComponent {
           if (err.error.code === 101) {
             this.errors.other.push('Incorrect username or password');
           } else {
-            this.errors.other.push(`${err.error.message}`);
+            this.errors.other.push(`${err.error.error}`);
           }
           return this.errorService.emitErrors(this.errors);
         },
       });
-    return null;
+    }else{
+      return this.errorService.emitErrors(this.errors);
+    }
   }
 }

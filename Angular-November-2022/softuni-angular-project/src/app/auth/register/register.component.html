@@ -1,4 +1,4 @@
-<div class="register-content">
+<div class="form-content">
     <h3>Register</h3>
     <form #registerForm="ngForm" (ngSubmit)="submitForm()">
       <label for="username">Username</label>
@@ -7,7 +7,6 @@
         id="username"
         requied
         minlength="3"
-        #username="ngModel"
         ngModel
         name="username"
       />
@@ -15,10 +14,7 @@
       <input
         type="email"
         id="email"
-        requied
-        minlength="3"
         email
-        #username="ngModel"
         ngModel
         name="email"
       />

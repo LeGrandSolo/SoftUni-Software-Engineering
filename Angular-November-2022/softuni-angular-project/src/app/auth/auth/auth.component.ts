@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ErrorService } from 'src/app/shared/error.service';
 
 @Component({
@@ -8,11 +8,6 @@ import { ErrorService } from 'src/app/shared/error.service';
 })
 export class AuthComponent {
   errors: Object = {};
-  constructor(private errorService: ErrorService) {
-    this.errorService.errorObservable.subscribe({
-      next: (err: Object) => {
-        this.errors = err;
-      },
-    });
-  }
+  constructor() {}
+  
 }

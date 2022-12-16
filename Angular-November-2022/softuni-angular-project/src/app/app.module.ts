@@ -10,11 +10,14 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CourseModule } from './course/course.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent],
-  imports: [BrowserModule, AppRoutingModule, RouterModule,HttpClientModule,BrowserAnimationsModule,CourseModule],
+  imports: [BrowserModule, AppRoutingModule, RouterModule,HttpClientModule,BrowserAnimationsModule,CourseModule,SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  
+}

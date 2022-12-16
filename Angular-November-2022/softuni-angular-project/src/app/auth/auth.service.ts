@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from '../core/api.service';
+import { ErrorService } from '../shared/error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private api: ApiService) {}
+  constructor(
+    private api: ApiService,
+    private errorService: ErrorService,
+    private router: Router
+  ) {}
   validateFields(form: any, isRegister: boolean) {
     const errors: {
       username: string[];
@@ -40,15 +46,22 @@ export class AuthService {
   ) {
     let userData;
     if (isRegister) {
-      userData = this.getCurrentUser(data)
-      localStorage.setItem('userData', JSON.stringify(userData));
+      this.api.get('/users/me', null, data.sessionToken).subscribe({
+        next: (v: any) => {
+          userData = {
+            username: v.username,
+            email: v.email,
+            sessionToken: v.sessionToken,
+          };
+          localStorage.setItem('userData', JSON.stringify(userData));
+        },
+      });
     } else {
       userData = {
         username: data.username,
         email: data.email,
         sessionToken: data.sessionToken,
       };
-
       localStorage.setItem('userData', JSON.stringify(userData));
     }
   }
@@ -59,17 +72,12 @@ export class AuthService {
     }
     return userData;
   }
-  getCurrentUser(localStorageData:any){
-    let userData = {}
-    this.api.get('/users/me', null, localStorageData.sessionToken).subscribe({
-      next: (v: any) => {
-        userData = {
-          username: v.username,
-          email: v.email,
-          sessionToken: v.sessionToken,
-        };
-        return userData
-      },
-    });
+  getCurrentUser(): any {
+    let userDataStorage: any = localStorage.getItem('userData');
+    if (userDataStorage) {
+      userDataStorage = JSON.parse(userDataStorage);
+      let userData = {};
+      return this.api.get('/users/me', null, userDataStorage.sessionToken)
+    }
   }
 }
