@@ -4,12 +4,15 @@
   margin: 2em auto;
   margin-top: 2em;
   position: relative;
-  background-color: #feffff;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 0.5em;
   text-align: center;
 }
 h3{
     margin-top: 2em;
+}
+h3, p ,a{
+  color: #feffff;
 }
 img {
   object-fit: contain;

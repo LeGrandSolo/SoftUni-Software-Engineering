@@ -8,7 +8,7 @@ ul {
 .course-instance {
   height: 32vh;
   overflow: hidden;
-  background-color: #2b7a78;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 0.5em;
   padding: 1em;
   transition: 1s;
@@ -70,6 +70,5 @@ button {
   color: #feffff;
   padding: 0.5em;
   border-radius: 0.2em;
-  background-color: #3aafa9;
   float: left;
 }
