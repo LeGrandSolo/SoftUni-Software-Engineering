@@ -7,8 +7,8 @@
       id="name"
       required="true"
       minlength="6"
-      #name="ngModel"
-      ngModel
+      maxlength="30"
+      [(ngModel)]="course.name"
       name="name"
     />
     <label for="description">Description</label>
@@ -20,14 +20,14 @@
       id="description"
       cols="30"
       rows="5"
-      ngModel
+      [(ngModel)]="course.description"
     ></textarea>
     <label for="imageUrl">Image Url</label>
     <input
       type="text"
       id="imageUrl"
       minlength="5"
-      ngModel
+      [(ngModel)]="course.imageUrl"
       name="imageUrl"
     />
     <div ngModelGroup="topics" id="topic-div">
@@ -49,6 +49,6 @@
       <input type="text" name="other" id="other" ngModel />
     </div>
 
-    <button>Add</button>
+    <button>Edit</button>
   </form>
 </div>

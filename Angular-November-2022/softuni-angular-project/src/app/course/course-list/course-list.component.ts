@@ -16,12 +16,10 @@ export class CourseListComponent implements OnInit {
     objectId: string;
   }[] | null = null;
   ngOnInit(): void {
-    this.api.get('/classes/Course').subscribe({
+    this.api.get('/classes/Discussions').subscribe({
       next: (v: any) => {
         this.courses = []
         this.courses = v.results;
-        console.log(v);
-        console.log(this.courses);
       },
     });
   }

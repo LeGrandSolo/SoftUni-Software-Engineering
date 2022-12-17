@@ -35,7 +35,9 @@ export class ErrorComponent implements OnInit, OnDestroy {
         clearTimeout(this.timeout);
         this.recievedErrors = err;
         for (const mess of Object.values(this.recievedErrors)) {
-          this.displayErrors?.push(mess);
+          mess.forEach((el: string) => {
+            this.displayErrors?.push(el);
+          });
         }
         this.timeout = setTimeout(() => {
           console.log('timeout');

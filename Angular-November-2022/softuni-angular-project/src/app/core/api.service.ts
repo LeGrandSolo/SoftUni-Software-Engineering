@@ -17,8 +17,8 @@ export class ApiService {
     headers?: HttpHeaders;
   } = {
     headers: new HttpHeaders({
-      'X-Parse-Application-Id': 'TVeG6qrvAmJND9j8oAXILpXRE7YqwAL0QAWA6jtE',
-      'X-Parse-REST-API-Key': 'UiFsng164fqhIFHpxs6LHNXAHkpL778PEoCvAKeG',
+      'X-Parse-Application-Id': 'nBO3OqdHvGYD3bcIJaJW5x0I4DiReq1vDjBHwHF8',
+      'X-Parse-REST-API-Key': '4McJpsLCN1COi4wZNJ312qdpHKWHwK9AD7uFRXQg',
       'X-Parse-Revocable-Session': '1',
       'X-Parse-Session-Token': '',
       'Content-Type': this.contentType,
@@ -61,5 +61,8 @@ export class ApiService {
       );
     }
     return this.http.get(this.apiUrl + url, this.options);
+  }
+  put(url: string, data: object) {
+    return this.http.put(this.apiUrl + url, data, this.options);
   }
 }

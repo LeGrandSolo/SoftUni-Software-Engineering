@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/api.service';
 import { AuthService } from 'src/app/core/auth.service';
 import { ErrorService } from 'src/app/shared/error.service';
-
+import { Course } from '../types';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -13,15 +13,18 @@ export class DetailsComponent implements OnInit {
   isLogged = false;
   isOwner = false;
   user: { objectId: string } | null = null;
-  course: {
-    createdAt: string;
-    description: string;
-    imageUrl: string;
-    name: string;
-    creator: { objectId: string };
-    objectId: string;
-    price: number;
-  } | null = null;
+  course: Course = {
+    createdAt: '',
+    description: '',
+    imageUrl: '',
+    name: '',
+    creator: {
+      objectId: '',
+    },
+    objectId: '',
+    topics: [],
+  };
+  topics = '';
   creator: { username: string; objectId: string } | null = null;
   id: string = this.activatedRoute.snapshot.params['id'];
   constructor(
@@ -37,25 +40,34 @@ export class DetailsComponent implements OnInit {
         this.user = {
           objectId: v.objectId,
         };
-        this.api.getById('/classes/Course', { objectId: this.id }).subscribe({
-          next: (v: any) => {
-            this.course = v.results[0];
-            this.api.get(`/users/${this.course?.creator.objectId}`).subscribe({
-              next: (v: any) => {
-                this.creator = v;
-                if (v.objectId === this.user?.objectId) {
-                  this.isOwner = true;
-                }
-                this.isLogged = true;
-              },
-            });
-          },
-        });
+        this.api
+          .getById('/classes/Discussions', { objectId: this.id })
+          .subscribe({
+            next: (v: any) => {
+              this.course = v.results[0];
+              this.api
+                .get(`/users/${this.course?.creator.objectId}`)
+                .subscribe({
+                  next: (v: any) => {
+                    this.creator = v;
+                    if (v.objectId === this.user?.objectId) {
+                      this.isOwner = true;
+                    }
+                    this.isLogged = true;
+                  },
+                  error(e) {
+                    console.log(e);
+                  },
+                });
+              this.topics = this.course.topics.join(', ');
+            },
+          });
       },
       error: () => {
-        this.api.getById('/classes/Course', { objectId: this.id }).subscribe({
+        this.api.getById('/classes/Discussions', { objectId: this.id }).subscribe({
           next: (v: any) => {
             this.course = v.results[0];
+            this.topics = this.course.topics.join(', ');
             this.api.get(`/users/${this.course?.creator.objectId}`).subscribe({
               next: (v: any) => {
                 this.creator = v;
@@ -71,7 +83,7 @@ export class DetailsComponent implements OnInit {
       next: (v: any) => {
         if (v.objectId === this.course?.creator.objectId) {
           this.api
-            .delete(`/classes/Course/${this.course?.objectId}`)
+            .delete(`/classes/Discussions/${this.course?.objectId}`)
             .subscribe({
               next: () => {
                 this.router.navigate(['/courses/all-courses']);

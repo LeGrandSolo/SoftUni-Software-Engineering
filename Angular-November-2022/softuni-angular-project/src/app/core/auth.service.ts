@@ -26,7 +26,6 @@ export class AuthService {
       other: [],
     };
     if (form.invalid) {
-      console.log(form);
       
       if (form.controls['username'].errors) {
         errors.username.push('Username must be at least 3 characters long');

@@ -1,9 +1,9 @@
 <div class="header">
-  <h1>SkillEarner</h1>
+  <h1>RRRREALNO POGLEDNATO</h1>
   <ul class="header-list">
     <span class="general-nav"
       ><li><a routerLink="/">Home</a></li>
-      <li><a routerLink="/courses/all-courses">All Lessons</a></li>
+      <li><a routerLink="/courses/all-courses">All Discussions</a></li>
       <li><a routerLink="/about">About</a></li></span
     >
     <span class="auth-nav" *ngIf="!userData"
@@ -12,7 +12,7 @@
     >
     <span *ngIf="userData" class="auth-nav">
       <li><a>Hello, {{ userData.username }}</a></li>
-      <li><a routerLink="/add-new">Add New Lesson</a></li>
+      <li><a routerLink="/add-new">Add New Discussion</a></li>
       <li><a routerLink="/auth/logout">Logout</a></li></span
     >
   </ul>

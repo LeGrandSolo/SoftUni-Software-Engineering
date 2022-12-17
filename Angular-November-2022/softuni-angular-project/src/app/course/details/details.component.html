@@ -4,24 +4,37 @@
     <div class="course-info">
       <h3>{{ course.name }}</h3>
       <p>{{ course.description }}</p>
-      <p>Price: {{ course.price }}$</p>
-      <p>Topics: Maths, Travel</p>
+      <p>Topics: {{ topics }}</p>
       <div *ngIf="!isOwner && isLogged" class="another-user">
-        <button class="blue-btn">Buy</button>
-        <button class="red-btn">Add to favorites</button>
+        <button class="blue-btn" >Like</button>
+        <div class="form-content">
+          <h4>Add comment</h4>
+          <form>
+            <label for="name">Title</label>
+            <input type="text" name="title" id="title" />
+            <label for="comment"></label>
+            <textarea
+              name="comment"
+              id="comment"
+              cols="20"
+              rows="10"
+            ></textarea>
+          </form>
+        </div>
       </div>
       <div *ngIf="isOwner" class="creator">
-        <button class="blue-btn">Edit</button>
+        <button
+          class="blue-btn"
+          routerLink="/courses/edit/{{ course.objectId }}"
+        >
+          Edit
+        </button>
         <button class="red-btn" (click)="delete()">Delete</button>
       </div>
     </div>
     <div class="user-container">
       <a routerLink="/profile/{{ creator?.objectId }}">
-        <img
-          src="../../../assets/icon-iconapng.png"
-          alt=""
-          class="user-img"
-        />
+        <img src="../../../assets/icon-iconapng.png" alt="" class="user-img" />
         <p>Creator: {{ creator?.username }}</p></a
       >
     </div>

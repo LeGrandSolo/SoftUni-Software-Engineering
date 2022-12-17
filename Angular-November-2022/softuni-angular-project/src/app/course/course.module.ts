@@ -6,15 +6,23 @@ import { ShowInFrontDirective } from './show-in-front.directive';
 import { DetailsComponent } from './details/details.component';
 import { AddNewComponent } from './add-new/add-new.component';
 import { FormsModule } from '@angular/forms';
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   { path: 'all-courses', component: CourseListComponent },
   { path: 'details/:id', component: DetailsComponent },
-  {path:"add-new", component:AddNewComponent}
+  { path: 'edit/:id', component: EditComponent },
+  { path: 'add-new', component: AddNewComponent },
 ];
 
 @NgModule({
-  declarations: [CourseListComponent, ShowInFrontDirective, DetailsComponent, AddNewComponent],
+  declarations: [
+    CourseListComponent,
+    ShowInFrontDirective,
+    DetailsComponent,
+    AddNewComponent,
+    EditComponent,
+  ],
   imports: [CommonModule, RouterModule.forChild(routes), FormsModule],
 })
 export class CourseModule {}
