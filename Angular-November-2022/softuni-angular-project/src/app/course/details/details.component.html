@@ -12,7 +12,7 @@
       </div>
       <div *ngIf="isOwner" class="creator">
         <button class="blue-btn">Edit</button>
-        <button class="red-btn">Delete</button>
+        <button class="red-btn" (click)="delete()">Delete</button>
       </div>
     </div>
     <div class="user-container">

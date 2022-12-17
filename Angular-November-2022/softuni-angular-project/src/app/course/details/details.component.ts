@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/api.service';
+import { AuthService } from 'src/app/core/auth.service';
 import { ErrorService } from 'src/app/shared/error.service';
 
 @Component({
@@ -10,15 +10,16 @@ import { ErrorService } from 'src/app/shared/error.service';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-  isLogged = false
+  isLogged = false;
   isOwner = false;
-  user: {objectId:string} | null = null;
+  user: { objectId: string } | null = null;
   course: {
     createdAt: string;
     description: string;
     imageUrl: string;
     name: string;
     creator: { objectId: string };
+    objectId: string;
     price: number;
   } | null = null;
   creator: { username: string; objectId: string } | null = null;
@@ -27,7 +28,8 @@ export class DetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private api: ApiService,
     private auth: AuthService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.auth.getCurrentUser().subscribe({
@@ -35,16 +37,16 @@ export class DetailsComponent implements OnInit {
         this.user = {
           objectId: v.objectId,
         };
-        this.isLogged = true
         this.api.getById('/classes/Course', { objectId: this.id }).subscribe({
           next: (v: any) => {
             this.course = v.results[0];
             this.api.get(`/users/${this.course?.creator.objectId}`).subscribe({
               next: (v: any) => {
                 this.creator = v;
-                if(v.objectId === this.user?.objectId){
-                  this.isOwner = true
+                if (v.objectId === this.user?.objectId) {
+                  this.isOwner = true;
                 }
+                this.isLogged = true;
               },
             });
           },
@@ -61,6 +63,27 @@ export class DetailsComponent implements OnInit {
             });
           },
         });
+      },
+    });
+  }
+  delete() {
+    this.auth.getCurrentUser().subscribe({
+      next: (v: any) => {
+        if (v.objectId === this.course?.creator.objectId) {
+          this.api
+            .delete(`/classes/Course/${this.course?.objectId}`)
+            .subscribe({
+              next: () => {
+                this.router.navigate(['/courses/all-courses']);
+              },
+              error: (err) => {
+                console.log(err.error.error);
+
+                this.errorService.emitErrors({ others: err.error.error });
+                this.router.navigate(['/courses/all-courses']);
+              },
+            });
+        }
       },
     });
   }

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ErrorService } from '../error.service';
 
@@ -19,18 +19,26 @@ import { ErrorService } from '../error.service';
     ]),
   ],
 })
-export class ErrorComponent implements OnInit {
+export class ErrorComponent implements OnInit, OnDestroy {
   recievedErrors: Object = {};
   displayErrors: string[] = [];
+  timeout!: NodeJS.Timeout;
   constructor(private errorService: ErrorService) {}
+  ngOnDestroy(): void {
+    clearTimeout(this.timeout);
+  }
   ngOnInit(): void {
+    clearTimeout(this.timeout);
     this.errorService.errorObservable.subscribe({
       next: (err: Object) => {
+        this.displayErrors = [];
+        clearTimeout(this.timeout);
         this.recievedErrors = err;
         for (const mess of Object.values(this.recievedErrors)) {
           this.displayErrors?.push(mess);
         }
-        setTimeout(() => {
+        this.timeout = setTimeout(() => {
+          console.log('timeout');
           this.displayErrors = [];
           this.recievedErrors = {};
         }, 4000);

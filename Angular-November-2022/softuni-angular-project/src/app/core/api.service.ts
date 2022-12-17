@@ -45,11 +45,14 @@ export class ApiService {
     }
     return this.http.get(this.apiUrl + url, this.options);
   }
+  delete(url: string) {
+    return this.http.delete(this.apiUrl + url, this.options);
+  }
   getById(
     url: string,
     data: { [param: string]: string },
     sessionToken?: string
-  ){
+  ) {
     url += '?where=' + JSON.stringify(data);
     if (sessionToken) {
       this.options.headers = this.options.headers?.set(

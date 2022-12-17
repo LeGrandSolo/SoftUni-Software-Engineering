@@ -26,6 +26,8 @@ export class AuthService {
       other: [],
     };
     if (form.invalid) {
+      console.log(form);
+      
       if (form.controls['username'].errors) {
         errors.username.push('Username must be at least 3 characters long');
       }
@@ -34,7 +36,7 @@ export class AuthService {
       }
       if (isRegister) {
         if (form.controls['email'].errors) {
-          errors.password.push('Email must be a valid one!');
+          errors.email.push('Email must be a valid one!');
         }
       }
     }
@@ -76,7 +78,6 @@ export class AuthService {
     let userDataStorage: any = localStorage.getItem('userData');
     if (userDataStorage) {
       userDataStorage = JSON.parse(userDataStorage);
-      let userData = {};
       return this.api.get('/users/me', null, userDataStorage.sessionToken)
     }
     return new Observable((observer)=>{
