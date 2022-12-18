@@ -7,21 +7,36 @@ import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthComponent } from './auth/auth.component';
 import { LogoutComponent } from './logout/logout.component';
+import { NotLoggedGuard } from '../not-logged.guard';
+import { LoggedGuard } from '../logged.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'logout', component: LogoutComponent }
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [NotLoggedGuard],
+      },
+      {
+        path: 'register',
+        component: RegisterComponent,
+        canActivate: [NotLoggedGuard],
+      },
+      { path: 'logout', component: LogoutComponent, canActivate: [LoggedGuard] },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuthComponent, LogoutComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    AuthComponent,
+    LogoutComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

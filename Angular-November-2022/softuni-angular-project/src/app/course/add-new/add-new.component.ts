@@ -76,7 +76,7 @@ export class AddNewComponent {
           console.log(value);
           this.api.post('/classes/Discussions', value).subscribe({
             next: (v: any) => {
-              this.router.navigate(['/all-courses']);
+              this.router.navigate(['/courses/all-courses']);
             },
             error: (err: any) => {
               this.errorService.emitErrors({ others: [err.error.error] });

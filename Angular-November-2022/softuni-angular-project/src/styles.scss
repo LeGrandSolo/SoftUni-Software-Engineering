@@ -30,6 +30,7 @@ body {
 
 header {
   background-color: rgba(36, 58, 92, 0.9);
+  z-index: 1;
 }
 
 footer {
@@ -37,6 +38,7 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+  z-index: 1;
   height: 3em;
 }
 a {
@@ -102,4 +104,23 @@ input {
   display: block;
   margin: 0 auto;
   text-align: center;
+  width: 30%;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(36, 58, 92, 0.6);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(36, 58, 92, 0.8);
+}
+.content{
+  overflow-y: scroll;
+  max-height: 80vh;
 }

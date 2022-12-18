@@ -7,12 +7,13 @@ import { DetailsComponent } from './details/details.component';
 import { AddNewComponent } from './add-new/add-new.component';
 import { FormsModule } from '@angular/forms';
 import { EditComponent } from './edit/edit.component';
+import { LoggedGuard } from '../logged.guard';
 
 const routes: Routes = [
   { path: 'all-courses', component: CourseListComponent },
   { path: 'details/:id', component: DetailsComponent },
-  { path: 'edit/:id', component: EditComponent },
-  { path: 'add-new', component: AddNewComponent },
+  { path: 'edit/:id', component: EditComponent, canActivate: [LoggedGuard] },
+  { path: 'add-new', component: AddNewComponent, canActivate: [LoggedGuard] },
 ];
 
 @NgModule({

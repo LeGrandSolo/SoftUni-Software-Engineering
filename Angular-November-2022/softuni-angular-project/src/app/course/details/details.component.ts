@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/api.service';
 import { AuthService } from 'src/app/core/auth.service';
@@ -10,10 +11,32 @@ import { Course } from '../types';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
+  @ViewChild('comment-form') form!: NgForm;
+  hasLiked = true;
   isLogged = false;
   isOwner = false;
-  user: { objectId: string } | null = null;
-  course: Course = {
+  user: { username: string; objectId: string; comments: string[] } = {
+    objectId: '',
+    username: '',
+    comments: [],
+  };
+  course: {
+    name: string;
+    comments: {
+      username: string;
+      objectId: string;
+      title: string;
+      comment: string;
+    }[];
+    description: string;
+    imageUrl: string;
+    topics: [];
+    objectId: string;
+    createdAt: string;
+    creator: { objectId: string };
+    likedUsers: string[];
+  } = {
+    comments: [],
     createdAt: '',
     description: '',
     imageUrl: '',
@@ -23,6 +46,7 @@ export class DetailsComponent implements OnInit {
     },
     objectId: '',
     topics: [],
+    likedUsers: [],
   };
   topics = '';
   creator: { username: string; objectId: string } | null = null;
@@ -39,12 +63,17 @@ export class DetailsComponent implements OnInit {
       next: (v: any) => {
         this.user = {
           objectId: v.objectId,
+          comments: v.comments,
+          username: v.username,
         };
         this.api
           .getById('/classes/Discussions', { objectId: this.id })
           .subscribe({
             next: (v: any) => {
               this.course = v.results[0];
+              if (!this.course.likedUsers.includes(this.user.objectId)) {
+                this.hasLiked = false;
+              }
               this.api
                 .get(`/users/${this.course?.creator.objectId}`)
                 .subscribe({
@@ -64,17 +93,21 @@ export class DetailsComponent implements OnInit {
           });
       },
       error: () => {
-        this.api.getById('/classes/Discussions', { objectId: this.id }).subscribe({
-          next: (v: any) => {
-            this.course = v.results[0];
-            this.topics = this.course.topics.join(', ');
-            this.api.get(`/users/${this.course?.creator.objectId}`).subscribe({
-              next: (v: any) => {
-                this.creator = v;
-              },
-            });
-          },
-        });
+        this.api
+          .getById('/classes/Discussions', { objectId: this.id })
+          .subscribe({
+            next: (v: any) => {
+              this.course = v.results[0];
+              this.topics = this.course.topics.join(', ');
+              this.api
+                .get(`/users/${this.course?.creator.objectId}`)
+                .subscribe({
+                  next: (v: any) => {
+                    this.creator = v;
+                  },
+                });
+            },
+          });
       },
     });
   }
@@ -99,4 +132,60 @@ export class DetailsComponent implements OnInit {
       },
     });
   }
+  like() {
+    if (
+      this.user.objectId !== '' &&
+      !this.course.likedUsers.includes(this.user.objectId)
+    ) {
+      this.course.likedUsers.push(this.user.objectId);
+      this.api
+        .put('/classes/Discussions/' + this.course.objectId, {
+          likedUsers: this.course.likedUsers,
+        })
+        .subscribe({
+          next: (v) => {
+            console.log('success');
+          },
+          error: (err) => {
+            this.errorService.emitErrors(err.error.message);
+          },
+        });
+      this.hasLiked = true;
+    } else {
+      this.errorService.emitErrors({ others: ['Already liked!'] });
+    }
+  }
+  /* submitForm() {
+    if (this.form.invalid) {
+      this.errorService.emitErrors({
+        others: ['All fields must be at least 5 characters long'],
+      });
+    } else {
+      if (!this.user.comments) {
+        this.user.comments = [];
+      }
+      this.user.comments.push(this.course.objectId);
+      this.api
+        .put('/users/' + this.user.objectId, { comments: this.user.comments })
+        .subscribe({
+          next: () => {
+            console.log('success');
+            this.course.comments.push({
+              username: this.user.username,
+              objectId: this.user.objectId,
+              title: this.form.controls['title'].value,
+              comment: this.form.controls['comment'].value,
+            });
+            this.api.put('/classes/Discussions', {
+              comments: this.course.comments,
+            });
+          },
+        });
+      const data = {
+        title: this.form.controls['title'].value,
+        comment: this.form.controls['comment'].value,
+      };
+      this.api.post('/classes/Discussions', data);
+    }
+  } */
 }

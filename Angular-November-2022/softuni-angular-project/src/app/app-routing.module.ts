@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CourseListComponent } from './course/course-list/course-list.component';
 import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,11 +13,21 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
   },
   {
     path: 'courses',
     loadChildren: () =>
       import('./course/course.module').then((m) => m.CourseModule),
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+    pathMatch: 'full',
   },
 ];
 

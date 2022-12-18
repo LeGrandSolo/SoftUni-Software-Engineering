@@ -30,12 +30,17 @@ export class ApiService {
   }
   get(
     url: string,
-    data?: { [param: string]: string } | null,
-    sessionToken?: string
+    data?: any,
+    sessionToken?: string,
+    whereParam?: boolean
   ): Observable<Object> {
     if (data) {
-      const params = new URLSearchParams(data);
-      url += '?' + params;
+      if (whereParam) {
+        url += `?where=${JSON.stringify(data)}`;
+      } else {
+        const params = new URLSearchParams(data);
+        url += '?' + params;
+      }
     }
     if (sessionToken) {
       this.options.headers = this.options.headers?.set(

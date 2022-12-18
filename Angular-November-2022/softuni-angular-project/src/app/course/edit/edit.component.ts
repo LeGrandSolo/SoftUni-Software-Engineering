@@ -100,7 +100,7 @@ export class EditComponent implements OnInit {
             .put('/classes/Discussions/' + this.course.objectId, value)
             .subscribe({
               next: (v: any) => {
-                this.router.navigate(['/all-courses']);
+                this.router.navigate(['/courses/all-courses']);
               },
               error: (err: any) => {
                 this.errorService.emitErrors({ other: [err.error.error] });

@@ -26,7 +26,6 @@ export class AuthService {
       other: [],
     };
     if (form.invalid) {
-      
       if (form.controls['username'].errors) {
         errors.username.push('Username must be at least 3 characters long');
       }
@@ -42,7 +41,12 @@ export class AuthService {
     return errors;
   }
   setUserData(
-    data: { username: string; email: string; sessionToken: string },
+    data: {
+      username: string;
+      email: string;
+      sessionToken: string;
+      objectId: string;
+    },
     isRegister: boolean
   ) {
     let userData;
@@ -53,6 +57,7 @@ export class AuthService {
             username: v.username,
             email: v.email,
             sessionToken: v.sessionToken,
+            objectId: v.objectId,
           };
           localStorage.setItem('userData', JSON.stringify(userData));
         },
@@ -62,6 +67,7 @@ export class AuthService {
         username: data.username,
         email: data.email,
         sessionToken: data.sessionToken,
+        objectId: data.objectId,
       };
       localStorage.setItem('userData', JSON.stringify(userData));
     }
@@ -77,10 +83,10 @@ export class AuthService {
     let userDataStorage: any = localStorage.getItem('userData');
     if (userDataStorage) {
       userDataStorage = JSON.parse(userDataStorage);
-      return this.api.get('/users/me', null, userDataStorage.sessionToken)
+      return this.api.get('/users/me', null, userDataStorage.sessionToken);
     }
-    return new Observable((observer)=>{
-      observer.error(new Error("Not logged in!"))
-    })
+    return new Observable((observer) => {
+      observer.error(new Error('Not logged in!'));
+    });
   }
 }
